@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FirstNP.Db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,26 @@ namespace FirstNP
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           MessageBox.Show("Test");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var Db = new MyDataBase())
+            {
+                Adreses adreses = new Adreses
+                {
+                    AdressName = "Leskova",
+                    PostCode = 33025
+                };
+                Db.Mies.Add(adreses);
+                Db.SaveChanges();
+
+            }
         }
     }
 }

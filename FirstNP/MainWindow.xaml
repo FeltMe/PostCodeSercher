@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirstNP"
         mc:Ignorable="d"
-        Title="Post code sercher" Height="350" Width="350" WindowStartupLocation="CenterScreen">
+        Title="Post code sercher" Height="350" Width="350" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,5 +22,6 @@
             <MenuItem Header="View"/>
             <MenuItem Header="Help"/>
         </Menu>
+        <Button Grid.Row="2" Click="Button_Click"/>
     </Grid> 
 </Window>
