@@ -5,23 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirstNP"
         mc:Ignorable="d"
-        Title="Post code sercher" Height="350" Width="350" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
-    <Grid>
+        Title="Post code sercher" Height="350" Width="350" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" MinHeight="350" MinWidth="350" MaxHeight="600" MaxWidth="600">
+    
+    
+    <Grid Background="#FF151515">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1.2*"/>
+            
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="Blue" Background="#FF151515">
             <MenuItem Header="Menu"/>
             <MenuItem Header="View"/>
             <MenuItem Header="Help"/>
         </Menu>
-        <Button Grid.Row="2" Click="Button_Click"/>
-    </Grid> 
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Background="#FF151515">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Background="#FF151515">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Content="Enter Post code" Foreground="Blue"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="#FF151515">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="1" Foreground="Blue"/>
+            </Grid>
+            <ListView x:Name="MyListView" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="5, 5, 5, 5">
+                <ListView.View>
+                    <GridView x:Name="Grid1">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="167">Name</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Button Grid.Column="3" Grid.Row="2" Background="#FF3E3E3E" Margin="4, 4, 2, 2" Content="Serch" Foreground="Blue" Click="Button_Click_1"/>
+    </Grid>
 </Window>

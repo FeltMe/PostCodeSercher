@@ -1,26 +1,17 @@
-﻿using FirstNP.Db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FirstNP.Client;
+using FirstNP.Db;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FirstNP
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interactio/n logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MyAdresesSercherClient MyCliet { get; set; } = new MyAdresesSercherClient();
+        public Adreses MyAdreses { get; set; } = new Adreses();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,22 +19,17 @@ namespace FirstNP
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           MessageBox.Show("Test");
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (var Db = new MyDataBase())
-            {
-                Adreses adreses = new Adreses
-                {
-                    AdressName = "Leskova",
-                    PostCode = 33025
-                };
-                Db.Mies.Add(adreses);
-                Db.SaveChanges();
+            
+        }
 
-            }
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MyCliet.Start();
         }
     }
 }
