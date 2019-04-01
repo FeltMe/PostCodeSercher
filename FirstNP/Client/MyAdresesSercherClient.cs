@@ -10,9 +10,9 @@ namespace FirstNP.Client
     {
         private const int port = 8888;
         private const string server = "127.0.0.1";
-        private List<string> Adreses = new List<string>();
+        private List<string> adreses = new List<string>();
 
-        public void Start(int Code)
+        public void Start(string Code)
         {
             try
             {
@@ -25,19 +25,22 @@ namespace FirstNP.Client
 
                 int bytes = stream.Read(ReadData, 0, ReadData.Length);
                 MessageBox.Show(Encoding.UTF8.GetString(ReadData, 0, bytes));
-                ReadData = null;
+                ReadData = new byte[2048];
 
 
-               //WriteData = BitConverter.GetBytes(port);
-               //stream.Write(WriteData, 0, WriteData.Length);
-               //
-               //StringBuilder response = new StringBuilder();
+                WriteData = Encoding.UTF8.GetBytes(Code);
+
+                stream.Write(WriteData, 0, WriteData.Length);
+
+
+
+                //StringBuilder response = new StringBuilder();
 
                 //do
                 //{
                 //    int bytes = stream.Read(ReadData, 0, ReadData.Length);
                 //    response.Append(Encoding.UTF8.GetString(ReadData, 0, bytes));
-                //    Adreses.Add(response.ToString());
+                //    adreses.Add(response.ToString());
                 //}
                 //while (stream.DataAvailable);
 

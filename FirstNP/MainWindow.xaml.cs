@@ -25,16 +25,14 @@ namespace FirstNP
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             try
             {
-                var Code = int.Parse(MyTextBox.Text);
-                MyCliet.Start(Code);
-
+                MyCliet.Start(MyTextBox.Text);
             }
             catch (FormatException)
             {

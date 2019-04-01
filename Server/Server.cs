@@ -12,6 +12,9 @@ namespace Server
     class Server
     {
         const int port = 8888;
+
+        public static object MessageBox { get; private set; }
+
         static void Main(string[] args)
         {
             TcpListener server = null;
@@ -42,7 +45,9 @@ namespace Server
 
                     stream.Write(Temp, 0, hims.Length);
 
-                    //stream.Read(code, 0, code.Length);
+                    int bytes = stream.Read(code, 0, code.Length);
+                    Console.WriteLine(Encoding.UTF8.GetString(code, 0, bytes)); 
+
 
                     //using (MyDataBase myData = new MyDataBase())
                     //{
@@ -58,10 +63,10 @@ namespace Server
                     //            stream.Write(data, 0, data.Length);
                     //            Console.WriteLine($"Send message: n ", response);
                     //        }
-                            
+
                     //    }
                     //}
-                    
+
 
 
                     stream.Close();
