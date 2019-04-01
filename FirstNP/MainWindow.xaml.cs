@@ -1,5 +1,6 @@
 ﻿using FirstNP.Client;
 using FirstNP.Db;
+using System;
 using System.Windows;
 
 namespace FirstNP
@@ -29,7 +30,20 @@ namespace FirstNP
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MyCliet.Start();
+            try
+            {
+                var Code = int.Parse(MyTextBox.Text);
+                MyCliet.Start(Code);
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("FormatException");
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("ArgumentException");
+            }
         }
     }
 }

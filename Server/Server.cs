@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Program
+    class Server
     {
         const int port = 8888;
         static void Main(string[] args)
@@ -19,32 +19,39 @@ namespace Server
             {
                 IPAddress localAddr = IPAddress.Parse("127.0.0.1");
                 server = new TcpListener(localAddr, port);
+                int PostCodeToSerch = 0;
 
                 server.Start();
 
                 while (true)
                 {
-                    Console.WriteLine("Start... ");
-
+                    Console.WriteLine("Start");
 
                     TcpClient client = server.AcceptTcpClient();
 
-                    Console.WriteLine("Connect client...");
-
+                    Console.WriteLine("Go");
 
                     NetworkStream stream = client.GetStream();
 
-                    
 
-                    using(MyDataBase myData = new MyDataBase())
+                    string hims = "Hi";
+                    byte[] data = new byte[2048];
+                    byte[] code = new byte[256];
+                    byte[] Temp = Encoding.UTF8.GetBytes(hims);
+
+
+                    stream.Write(Temp, 0, hims.Length);
+                    stream.Read(code, 0, code.Length);
+
+                    using (MyDataBase myData = new MyDataBase())
                     {
                         foreach (var item in myData.Mies)
                         {
-                            if(item.PostCode == client)
+                            if(item.PostCode == PostCodeToSerch)
                             {
                                 string response = item.AdressName;
 
-                                byte[] data = Encoding.UTF8.GetBytes(response);
+                                byte[] SendingData = Encoding.UTF8.GetBytes(response);
 
 
                                 stream.Write(data, 0, data.Length);
