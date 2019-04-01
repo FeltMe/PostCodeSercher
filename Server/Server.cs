@@ -41,25 +41,26 @@ namespace Server
 
 
                     stream.Write(Temp, 0, hims.Length);
-                    stream.Read(code, 0, code.Length);
 
-                    using (MyDataBase myData = new MyDataBase())
-                    {
-                        foreach (var item in myData.Mies)
-                        {
-                            if(item.PostCode == PostCodeToSerch)
-                            {
-                                string response = item.AdressName;
+                    //stream.Read(code, 0, code.Length);
 
-                                byte[] SendingData = Encoding.UTF8.GetBytes(response);
+                    //using (MyDataBase myData = new MyDataBase())
+                    //{
+                    //    foreach (var item in myData.Mies)
+                    //    {
+                    //        if(item.PostCode == PostCodeToSerch)
+                    //        {
+                    //            string response = item.AdressName;
+
+                    //            byte[] SendingData = Encoding.UTF8.GetBytes(response);
 
 
-                                stream.Write(data, 0, data.Length);
-                                Console.WriteLine($"Send message: n ", response);
-                            }
+                    //            stream.Write(data, 0, data.Length);
+                    //            Console.WriteLine($"Send message: n ", response);
+                    //        }
                             
-                        }
-                    }
+                    //    }
+                    //}
                     
 
 
