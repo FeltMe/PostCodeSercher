@@ -23,8 +23,8 @@ namespace FirstNP.Client
                 byte[] WriteData = new byte[1024];
                 NetworkStream stream = client.GetStream();
 
-                int bytes = stream.Read(ReadData, 0, ReadData.Length);
-                MessageBox.Show(Encoding.UTF8.GetString(ReadData, 0, bytes));
+                int Hibytes = stream.Read(ReadData, 0, ReadData.Length);
+                MessageBox.Show(Encoding.UTF8.GetString(ReadData, 0, Hibytes));
                 ReadData = new byte[2048];
 
 
@@ -32,17 +32,15 @@ namespace FirstNP.Client
 
                 stream.Write(WriteData, 0, WriteData.Length);
 
+                StringBuilder response = new StringBuilder();
 
-
-                //StringBuilder response = new StringBuilder();
-
-                //do
-                //{
-                //    int bytes = stream.Read(ReadData, 0, ReadData.Length);
-                //    response.Append(Encoding.UTF8.GetString(ReadData, 0, bytes));
-                //    adreses.Add(response.ToString());
-                //}
-                //while (stream.DataAvailable);
+                do
+                {
+                    int BLenght = stream.Read(ReadData, 0, ReadData.Length);
+                    response.Append(Encoding.UTF8.GetString(ReadData, 0, BLenght));
+                    adreses.Add(response.ToString());
+                }
+                while (stream.DataAvailable);
 
 
 

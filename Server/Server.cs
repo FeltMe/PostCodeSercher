@@ -22,8 +22,6 @@ namespace Server
             {
                 IPAddress localAddr = IPAddress.Parse("127.0.0.1");
                 server = new TcpListener(localAddr, port);
-                int PostCodeToSerch = 0;
-
                 server.Start();
 
                 while (true)
@@ -46,26 +44,25 @@ namespace Server
                     stream.Write(Temp, 0, hims.Length);
 
                     int bytes = stream.Read(code, 0, code.Length);
-                    Console.WriteLine(Encoding.UTF8.GetString(code, 0, bytes)); 
+                    var MyPostCode = Int32.Parse(Encoding.UTF8.GetString(code, 0, bytes));
+
+                    using (MyDataBase myData = new MyDataBase())
+                    {
+                        foreach (var item in myData.Mies)
+                        {
+                            if (item.PostCode == MyPostCode)
+                            {
+                                string response = item.AdressName;
+
+                                byte[] SendingData = Encoding.UTF8.GetBytes(response);
 
 
-                    //using (MyDataBase myData = new MyDataBase())
-                    //{
-                    //    foreach (var item in myData.Mies)
-                    //    {
-                    //        if(item.PostCode == PostCodeToSerch)
-                    //        {
-                    //            string response = item.AdressName;
+                                stream.Write(data, 0, data.Length);
+                                Console.WriteLine($"Send message: n ", response);
+                            }
 
-                    //            byte[] SendingData = Encoding.UTF8.GetBytes(response);
-
-
-                    //            stream.Write(data, 0, data.Length);
-                    //            Console.WriteLine($"Send message: n ", response);
-                    //        }
-
-                    //    }
-                    //}
+                        }
+                    }
 
 
 
