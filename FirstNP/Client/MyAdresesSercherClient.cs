@@ -12,7 +12,7 @@ namespace FirstNP.Client
         private const string server = "127.0.0.1";
         private List<string> adreses = new List<string>();
 
-        public void Start(string Code)
+        public List<string> Start(string Code)
         {
             try
             {
@@ -46,11 +46,14 @@ namespace FirstNP.Client
 
                 stream.Close();
                 client.Close();
+                return adreses;
+
             }
             catch (SocketException)
             {
                 MessageBox.Show("SocketException");
             }
+            return null;
         }
     }
 }

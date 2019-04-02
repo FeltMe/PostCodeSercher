@@ -1,4 +1,5 @@
-﻿using FirstNP.Db;
+﻿using FirstNP;
+using FirstNP.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,25 +47,7 @@ namespace Server
                     int bytes = stream.Read(code, 0, code.Length);
                     var MyPostCode = Int32.Parse(Encoding.UTF8.GetString(code, 0, bytes));
 
-                    using (MyDataBase myData = new MyDataBase())
-                    {
-                        foreach (var item in myData.Mies)
-                        {
-                            if (item.PostCode == MyPostCode)
-                            {
-                                string response = item.AdressName;
-
-                                byte[] SendingData = Encoding.UTF8.GetBytes(response);
-
-
-                                stream.Write(data, 0, data.Length);
-                                Console.WriteLine($"Send message: n ", response);
-                            }
-
-                        }
-                    }
-
-
+                    Sercher(MyPostCode, stream, data);
 
                     stream.Close();
 
@@ -79,6 +62,32 @@ namespace Server
             {
                 if (server != null)
                     server.Stop();
+            }
+        }
+
+        private static void Sercher(int MyPostCode, NetworkStream stream, byte[] data)
+        {
+            try
+            {
+                using (MyDataBase myData = new MyDataBase())
+                {
+                    foreach (var item in myData.Mies)
+                    {
+                        if (item.PostCode == MyPostCode)
+                        {
+                            string response = item.AdressName;
+
+                            byte[] SendingData = Encoding.UTF8.GetBytes(response);
+
+                            stream.Write(data, 0, data.Length);
+                            Console.WriteLine($"Send message: n ", response);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString() + " Eto ya!");
             }
         }
     }

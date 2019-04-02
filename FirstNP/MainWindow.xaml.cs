@@ -1,6 +1,7 @@
 ﻿using FirstNP.Client;
 using FirstNP.Db;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace FirstNP
@@ -11,7 +12,7 @@ namespace FirstNP
     public partial class MainWindow : Window
     {
         public MyAdresesSercherClient MyCliet { get; set; } = new MyAdresesSercherClient();
-        public Adreses MyAdreses { get; set; } = new Adreses();
+        public List<string> MyAdreses { get; set; } = new List<string>();
 
         public MainWindow()
         {
@@ -32,7 +33,9 @@ namespace FirstNP
         {
             try
             {
-                MyCliet.Start(MyTextBox.Text);
+                MyAdreses = MyCliet.Start(MyTextBox.Text);
+                Print(MyAdreses);
+
             }
             catch (FormatException)
             {
@@ -41,6 +44,13 @@ namespace FirstNP
             catch (ArgumentException)
             {
                 MessageBox.Show("ArgumentException");
+            }
+        }
+        private void Print(List<string> adreses)
+        {
+            foreach (var item in adreses)
+            {
+                MyListView.Items.Add("Lel");
             }
         }
     }
